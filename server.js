@@ -3,7 +3,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 // const routes = require("./routes");
-const user = require("./routes/api/user");
+
+const user = require("./routes/api/user")
 
 const app = express();
 
@@ -22,6 +23,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Add routes, both API and view
+
 app.use('/api/user', user);
 
 // Connect to the Mongo DB

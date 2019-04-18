@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-
-
 // User Model
 const User = require("../../models/Users");
 
@@ -32,7 +30,6 @@ newUser.save().then(user => res.json(user));
 //  .then(item => item.remove().then(() => res.json({success: true})))
 //  .catch(err => res.status(404).json({ success: false}))
 //  });
-
 
 
 module.exports = router;
