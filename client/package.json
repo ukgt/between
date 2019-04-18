@@ -30,7 +30,7 @@
     "not op_mini all"
   ],
   "description": "Map Mid-Point Finder with the MERN Stack",
-  "main": "index.js",
+  "main": "client/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ukgt/between.git"
