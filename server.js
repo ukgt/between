@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 // const routes = require("./routes");
 
+const user = require("./routes/api/user")
+
 const app = express();
 
 const PORT = process.env.PORT || 3001;
@@ -21,13 +23,15 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Add routes, both API and view
-// app.use(routes);
+
+app.use('/api/user', user);
 
 // Connect to the Mongo DB
 mongoose
     .connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist")
     .then(() => console.log("MongoDB Connected..."))
     .catch((err => console.log(err)));
+
 
 // Start the API server
 app.listen(PORT, () => console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`));
