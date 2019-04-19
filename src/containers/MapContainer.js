@@ -14,6 +14,7 @@ class MapsContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentSearchInput: "",
       constraints: [{ name: "", time: 0 }],
       searchResults: [],
       mapsLoaded: false,
@@ -31,10 +32,13 @@ class MapsContainer extends Component {
   // Update name for constraint with index === key
   updateConstraintName = (event, key) => {
     event.preventDefault();
-    const prevConstraints = this.state.constraints;
-    const constraints = Object.assign([], prevConstraints);
-    constraints[key].name = event.target.value;
-    this.setState({ constraints });
+    this.setState({ currentSearchInput: event.target.value }, () => {
+      console.log(this.state.currentSearchInput);
+    });
+    // const prevConstraints = this.state.constraints;
+    // const constraints = Object.assign([], prevConstraints);
+    // constraints[key].name = event.target.value;
+    // this.setState({ constraints });
   };
 
   // Updates distance (in KM) for constraint with index == key
@@ -87,6 +91,8 @@ class MapsContainer extends Component {
 
   // With the constraints, find some places to meet halfway
   handleSearch = () => {
+    console.log("CURRENT SEARCH QUERY", this.state.currentSearchInput);
+    console.log("CURRENT State ", this.state);
     const {
       markers,
       constraints,
@@ -107,7 +113,7 @@ class MapsContainer extends Component {
       location: markerLatLng,
       // radius: '30000', // Cannot be used with rankBy. Pick your poison!
       type: ["restaurant", "cafe"], // List of types: https://developers.google.com/places/supported_types
-      query: "pizza+coffee",
+      query: this.state.currentSearchInput,
       rankBy: mapsApi.places.RankBy.DISTANCE, // Cannot be used with radius.
     };
 
@@ -183,13 +189,13 @@ class MapsContainer extends Component {
                 return (
                   <div key={key} className="mb-4">
                     <div className="d-flex mb-2">
-                      <Input
+                      {/* <Input
                         className="col-4 mr-2"
                         placeholder="Name"
                         onChange={event =>
                           this.updateConstraintName(event, key)
                         }
-                      />
+                      /> */}
                       <Input
                         className="col-4 mr-2"
                         placeholder="Pizza"
@@ -223,7 +229,7 @@ class MapsContainer extends Component {
         <section className="col-8 h-lg">
           <GoogleMapReact
             bootstrapURLKeys={{
-              key: process.env.google_api_key,
+              key: process.env.REACT_APP_GOOGLE_API_KEY,
               libraries: ["places", "directions"],
             }}
             defaultZoom={4}
