@@ -208,7 +208,9 @@ class MapsContainer extends Component {
                     <ConstraintSlider
                       iconType="car"
                       value={time}
-                      onChange={value => this.updateConstraintTime(key, value)}
+                      onChange={value =>
+                        this.updateConstraintTime(key, value)
+                      }
                       text="Minutes away by car"
                     />
                     <Divider />
@@ -229,12 +231,16 @@ class MapsContainer extends Component {
             defaultZoom={4}
             defaultCenter={{ lat: USA_COOR.lat, lng: USA_COOR.lng }}
             yesIWantToUseGoogleMapApiInternals={true}
-            onGoogleApiLoaded={({ map, maps }) => this.apiHasLoaded(map, maps)} // "maps" is the mapApi. Bad naming but that's their library.
+            onGoogleApiLoaded={({ map, maps }) =>
+              this.apiHasLoaded(map, maps)
+            } // "maps" is the mapApi. Bad naming but that's their library.
           >
             {/* Pin markers on the Map*/}
             {markers.map((marker, key) => {
               const { name, lat, lng } = marker;
-              return <MapMarker key={key} name={name} lat={lat} lng={lng} />;
+              return (
+                <MapMarker key={key} name={name} lat={lat} lng={lng} />
+              );
             })}
           </GoogleMapReact>
         </section>
@@ -255,7 +261,9 @@ class MapsContainer extends Component {
             <Divider />
             <section className="col-12">
               <div className="d-flex flex-column justify-content-center">
-                <h1 className="mb-4 fw-md">Here are your meeting places!</h1>
+                <h1 className="mb-4 fw-md">
+                  Here are your meeting places!
+                </h1>
                 <div className="d-flex flex-wrap">
                   {searchResults.map((result, key) => (
                     <PlaceCard info={result} key={key} />
